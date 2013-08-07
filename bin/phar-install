@@ -5,7 +5,10 @@ $phar = new Phar('vendor.phar');
 
 $di = new RecursiveDirectoryIterator('vendor');
 foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-  if (preg_match('_/\.\.?$_', $filename)) {
+  if (
+    preg_match('_/\.\.?$_', $filename) || # .. and .
+    preg_match('_/\.git/_', $filename)    # .git
+  ) {
     continue;
   }
   echo "Adding file: $filename\n";
