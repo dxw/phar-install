@@ -1,7 +1,15 @@
 #!/usr/bin/env php
 <?php
 
-$phar = new Phar('vendor.phar');
+$target = 'vendor.phar';
+
+// Delete first because otherwise we're just adding files to the archive
+if (file_exists($target)) {
+  echo "Deleting: $target\n";
+  unlink($target);
+}
+
+$phar = new Phar($target);
 
 $di = new RecursiveDirectoryIterator('vendor');
 foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
