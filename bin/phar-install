@@ -23,4 +23,4 @@ foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
   $phar->addFile($filename);
 }
 
-$phar->setStub($phar->createDefaultStub('vendor/autoload.php'));
+$phar->setStub('<?php include(__DIR__."/vendor/autoload.php"); __HALT_COMPILER(); ?>');
