@@ -23,4 +23,6 @@ foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
   $phar->addFile($filename);
 }
 
-$phar->setStub('<?php include(__DIR__."/vendor/autoload.php"); __HALT_COMPILER(); ?>');
+$rand = sprintf('%x', mt_rand());
+
+$phar->setStub("<?php Phar::mapPhar('{$rand}'); include('phar://{$rand}/vendor/autoload.php'); __HALT_COMPILER();");
