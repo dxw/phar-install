@@ -2,6 +2,7 @@
 <?php
 
 $target = 'vendor.phar';
+$tmp = '/tmp/phar-install-tmp.phar';
 
 // Delete first because otherwise we're just adding files to the archive
 if (file_exists($target)) {
@@ -9,7 +10,7 @@ if (file_exists($target)) {
   unlink($target);
 }
 
-$phar = new Phar($target);
+$phar = new Phar($tmp);
 
 $di = new RecursiveDirectoryIterator('vendor');
 foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
@@ -26,3 +27,5 @@ foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
 $rand = sprintf('%x', mt_rand());
 
 $phar->setStub("<?php Phar::mapPhar('{$rand}'); include('phar://{$rand}/vendor/autoload.php'); __HALT_COMPILER();");
+
+rename($tmp, $target);
