@@ -1,16 +1,27 @@
 #!/bin/sh
+set -xe
 # This is a shell script instead of a PHP script because we need to be able to set an ini option that ini_set() can't set
+
+# Temp locations
+
+export TMP_DIR=/tmp/phar-install-tmp-dir
+export TMP_FILE=/tmp/phar-install-tmp.phar
+export PHAR=`pwd`/vendor.phar
+
+# Cleanup
+
+rm -rf $TMP_DIR $TMP_FILE
+mkdir -p $TMP_DIR
+
+# Install dependencies
+
+COMPOSER_VENDOR_DIR=$TMP_DIR/vendor composer install --no-dev --no-interaction
+
+cd $TMP_DIR
 
 php -d phar.readonly=Off <<'EOF'
 <?php
-$target = 'vendor.phar';
-$tmp = '/tmp/phar-install-tmp.phar';
-
-// Delete first because otherwise we're just adding files to the archive
-if (file_exists($target)) {
-  echo "Deleting: $target\n";
-  unlink($target);
-}
+$tmp = getenv('TMP_FILE');
 
 $phar = new Phar($tmp);
 
@@ -29,6 +40,8 @@ foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
 $rand = sprintf('%x', mt_rand());
 
 $phar->setStub("<?php Phar::mapPhar('{$rand}'); include('phar://{$rand}/vendor/autoload.php'); __HALT_COMPILER();");
-
-rename($tmp, $target);
 EOF
+
+mv -f $TMP_FILE $PHAR
+
+rm -rf $TMP_DIR $TMP_FILE
