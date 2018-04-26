@@ -1,19 +1,30 @@
 # phar-install
 
-Tool to bundle up contents of vendor/ into vendor.phar file.
+Tool to bundle up contents of `vendor/` into `vendor.phar` file.
 
-This may be useful if you want to put your project in a web-readable directory but you don't want to trawl through all the files in vendor/ to make sure none of them could allow an attacker to do something they shouldn't be able to do.
+This may be useful if you want to put your project in a web-readable directory but you don't want to trawl through all the files in `vendor/` to make sure none of them could allow an attacker to do something they shouldn't be able to do.
 
 ## Usage
 
-    # install it into a project
-    composer require --dev dxw/phar-install=dev-master
-    # build vendor.phar
-    vendor/bin/phar-install
-    # replace "include __DIR__.'/vendor/autoload.php';" with "include __DIR__.'/vendor.phar';"
-    vim functions.php
+Add the following to `composer.json`:
 
-**Get composer's autoloader**
+```
+  "scripts": {
+    "post-update-cmd": "vendor/bin/phar-install"
+  },
+```
+
+Add phar-install:
+
+```
+composer require --dev dxw/phar-install
+```
+
+`vendor.phar` will be rebuilt automatically every time `composer update` or `composer require` is run.
+
+Now just replace `require(__DIR__.'/vendor/autoload.php');` with `require(__DIR__.'/vendor.phar');`.
+
+### Get composer's autoloader
 
 You can also get access to the autoloader object if needed. The phar file will return the autoloader. With this functionality you can add on your own project's namespaced files into the autoloader.
 
