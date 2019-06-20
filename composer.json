@@ -5,9 +5,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Tom Adams",
-            "email": "tom@dxw.com",
-            "homepage": "http://dxw.com"
+            "name": "Mallory Adams",
+            "email": "mallory@dxw.com",
+            "homepage": "https://www.dxw.com"
         }
     ],
     "bin": ["bin/phar-install"]
