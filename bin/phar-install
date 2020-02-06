@@ -26,7 +26,9 @@ $tmp = getenv('TMP_FILE');
 $phar = new Phar($tmp);
 
 echo 'Building phar file files' . PHP_EOL;
-$phar->buildFromDirectory('./', '_(?!.*\/\.git\/)_'); //not sure if this regex is correct to filter out all .git folders
+
+// The regex removes `.git` directories
+$phar->buildFromDirectory('.', '_^(?!.*/\\.git/)_');
 
 $rand = sprintf('%x', mt_rand());
 
