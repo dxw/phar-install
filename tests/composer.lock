@@ -1,0 +1,107 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "536b8165afa4eeb67511452cd6f269e7",
+    "packages": [
+        {
+            "name": "aura/autoload",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Autoload.git",
+                "reference": "306a7f8d3cb58fb6f94bcff1dddf20c543f68668"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Autoload/zipball/306a7f8d3cb58fb6f94bcff1dddf20c543f68668",
+                "reference": "306a7f8d3cb58fb6f94bcff1dddf20c543f68668",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Autoload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Autoload Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Autoload/contributors"
+                }
+            ],
+            "description": "Provides a PSR-4 compliant autoloader implementation.",
+            "homepage": "https://github.com/auraphp/Aura.Autoload",
+            "keywords": [
+                "PSR-4",
+                "SPL autoloader",
+                "autoload",
+                "autoloader",
+                "class loader"
+            ],
+            "time": "2016-10-03T19:36:19+00:00"
+        },
+        {
+            "name": "dxw/iguana",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dxw/iguana.git",
+                "reference": "5a9fb4244a512315d75458cd42b19343f52623f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dxw/iguana/zipball/5a9fb4244a512315d75458cd42b19343f52623f9",
+                "reference": "5a9fb4244a512315d75458cd42b19343f52623f9",
+                "shasum": ""
+            },
+            "require": {
+                "aura/autoload": "^2.0"
+            },
+            "require-dev": {
+                "10up/wp_mock": "^0.3.0",
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dxw\\Iguana\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "homepage": "https://github.com/dxw/iguana",
+            "time": "2018-09-28T13:16:07+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.0.22"
+    },
+    "plugin-api-version": "1.1.0"
+}

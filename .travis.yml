@@ -1,0 +1,14 @@
+language: php
+sudo: false
+git:
+  submodules: false
+php:
+  - 7.0.22
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+script:
+  - cd tests
+  - composer update
+  - php test.php
