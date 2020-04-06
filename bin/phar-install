@@ -25,17 +25,10 @@ $tmp = getenv('TMP_FILE');
 
 $phar = new Phar($tmp);
 
-$di = new RecursiveDirectoryIterator('vendor');
-foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-  if (
-    preg_match('_/\.\.?$_', $filename) || # .. and .
-    preg_match('_/\.git/_', $filename)    # .git
-  ) {
-    continue;
-  }
-  echo "Adding file: $filename\n";
-  $phar->addFile($filename);
-}
+echo 'Building phar file files' . PHP_EOL;
+
+// The regex removes `.git` directories
+$phar->buildFromDirectory('.', '_^(?!.*/\\.git/)_');
 
 $rand = sprintf('%x', mt_rand());
 

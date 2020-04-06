@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "post-update-cmd": "../bin/phar-install"
+    },
+    "require": {
+        "dxw/iguana": "dev-master"
+    }
+}
