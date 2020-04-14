@@ -1,0 +1,4 @@
+{
+  "directories": "vendor/",
+  "output": "vendor.phar"
+}

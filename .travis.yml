@@ -10,5 +10,5 @@ php:
   - 7.4
 script:
   - cd tests
-  - ../bin/phar-install
+  - ../vendor/bin/box build
   - php test.php

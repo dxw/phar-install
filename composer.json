@@ -10,5 +10,8 @@
             "homepage": "https://www.dxw.com"
         }
     ],
-    "bin": ["bin/phar-install"]
+    "bin": ["bin/phar-install"],
+    "require-dev": {
+        "kherge/box": "^2.7"
+    }
 }

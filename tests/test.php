@@ -1,8 +1,6 @@
 <?php
 
 const EXPECTED =[
-    'vendor/aura/autoload/.scrutinizer.yml',
-    'vendor/aura/autoload/.travis.yml',
     'vendor/aura/autoload/CHANGES.md',
     'vendor/aura/autoload/CONTRIBUTING.md',
     'vendor/aura/autoload/LICENSE',
@@ -25,9 +23,6 @@ const EXPECTED =[
     'vendor/composer/autoload_real.php',
     'vendor/composer/autoload_static.php',
     'vendor/composer/installed.json',
-    'vendor/dxw/iguana/.gitignore',
-    'vendor/dxw/iguana/.php_cs',
-    'vendor/dxw/iguana/.travis.yml',
     'vendor/dxw/iguana/COPYING.md',
     'vendor/dxw/iguana/README.md',
     'vendor/dxw/iguana/composer.json',
