@@ -1,6 +1,6 @@
 <?php
 
-const EXPECTED =[
+$EXPECTED =[
     'vendor/aura/autoload/CHANGES.md',
     'vendor/aura/autoload/CONTRIBUTING.md',
     'vendor/aura/autoload/LICENSE',
@@ -70,6 +70,8 @@ const EXPECTED =[
     '.box/vendor/composer/semver/src/VersionParser.php',
 ];
 
+sort($EXPECTED);
+
 const VENDORPHAR = 'vendor.phar';
 
 $phar = new Phar(VENDORPHAR, FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME);
@@ -87,7 +89,9 @@ foreach (new \RecursiveIteratorIterator($phar) as $file) {
     $paths[] = $relativePath;
 }
 
-if ($paths !== EXPECTED) {
+sort($paths);
+
+if ($paths !== $EXPECTED) {
     echo "TEST FAILED: arrays do not match!\n";
     foreach ($paths as $path) {
         if (!in_array($path, EXPECTED)) {
