@@ -12,6 +12,6 @@
     ],
     "bin": ["bin/phar-install"],
     "require-dev": {
-        "kherge/box": "^2.7"
+        "humbug/box": "^3.8"
     }
 }

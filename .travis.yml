@@ -10,5 +10,5 @@ php:
   - 7.4
 script:
   - cd tests
-  - ../vendor/bin/box build
+  - ../vendor/bin/box compile
   - php test.php

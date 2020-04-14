@@ -1,4 +1,5 @@
 {
-  "directories": "vendor/",
-  "output": "vendor.phar"
+  "directories": ["vendor/"],
+  "output": "vendor.phar",
+  "main": false
 }
