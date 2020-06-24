@@ -1,23 +1,31 @@
-# phar-install
+# phar-install is DEPRECATED
 
-Tool to bundle up contents of `vendor/` into `vendor.phar` file.
-
-This may be useful if you want to put your project in a web-readable directory but you don't want to trawl through all the files in `vendor/` to make sure none of them could allow an attacker to do something they shouldn't be able to do.
+Please use `humbug/box` to bundle contents of `vendor/` into a `vendor.phar` file.
 
 ## Usage
 
-Add the following to `composer.json`:
+Add `humbug/box`:
 
+```sh
+composer require --dev humbug/box
 ```
+
+Add a `box.json` file to your project:
+
+```json
+{
+  "directories": ["vendor/"],
+  "output": "vendor.phar",
+  "main": false
+}
+```
+
+Then add the following to `composer.json`:
+
+```json
   "scripts": {
-    "post-update-cmd": "vendor/bin/phar-install"
+    "post-update-cmd": "vendor/bin/box compile"
   },
-```
-
-Add phar-install:
-
-```
-composer require --dev dxw/phar-install
 ```
 
 `vendor.phar` will be rebuilt automatically every time `composer update` or `composer require` is run.
@@ -32,7 +40,3 @@ You can also get access to the autoloader object if needed. The phar file will r
 $autoload = require_once __DIR__ . '/vendor.phar';
 $autoload->add('MyNamespace', __DIR__ . '/src');
 ```
-
-## Copyright
-
-Copyright dxw 2015 - see [COPYING.md](COPYING.md)
