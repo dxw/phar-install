@@ -1,0 +1,21 @@
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php-versions: ['7.0.22', '7.1', '7.2', '7.3', '7.4']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+      - name: Run tests
+        run: |
+            cd tests
+            ../bin/phar-install
+            php test.php
