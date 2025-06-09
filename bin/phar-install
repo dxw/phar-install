@@ -1,5 +1,5 @@
-#!/bin/sh
-set -xe
+#!/bin/bash
+set -e
 # This is a shell script instead of a PHP script because we need to be able to set an ini option that ini_set() can't set
 
 # Temp locations
@@ -7,6 +7,16 @@ set -xe
 export TMP_DIR=/tmp/phar-install-tmp-dir
 export TMP_FILE=/tmp/phar-install-tmp.phar
 export PHAR=`pwd`/vendor.phar
+# No trailing slash, it's added by sed below.
+export PHAR_INSTALL_PATH_TO_WP_CONTENT="/var/www/html"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  # BSD sed
+  SED_INPLACE_OPT="-i '.bak'"
+else
+  # shellcheck disable=SC2034
+  SED_INPLACE_OPT="-i"
+fi
 
 # Cleanup
 
@@ -18,6 +28,15 @@ mkdir -p $TMP_DIR
 COMPOSER_VENDOR_DIR=$TMP_DIR/vendor composer install --no-dev --no-interaction
 
 cd $TMP_DIR
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  find . -type f -name "autoload*.php" -print0 | \
+  xargs -0 sed -i '' -E "s|'[^']*/wp-content/(.*)'|'${PHAR_INSTALL_PATH_TO_WP_CONTENT}/wp-content/\1'|g"
+  rm -Rf "*.bak"
+else
+  find . -type f -name 'autoload*.php' -print0 | \
+  xargs -0 sed -i -E "s|'[^']*/wp-content/(.*)'|'/var/www/html/wp-content/\1'|g"
+fi
 
 php -d phar.readonly=Off <<'EOF'
 <?php

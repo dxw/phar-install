@@ -33,6 +33,30 @@ $autoload = require_once __DIR__ . '/vendor.phar';
 $autoload->add('MyNamespace', __DIR__ . '/src');
 ```
 
+## Deployed WordPress paths
+
+For WordPress developers, any path created by Composer for the
+autoloader is automatically re-written so that:
+
+    /path/to/wp-content/...
+
+becomes:
+
+    /var/www/html/wp-content/...
+
+The path prefix can be controlled by setting the `PHAR_INSTALL_PATH_TO_WP_CONTENT`
+environment variable.
+
+By default, Composer hard-codes absolute paths in classmaps,
+and if you run `phar-install` on a development machine then
+deploy the phar file to a live environment, you may see error
+messages that reflect the contents of the classmap, rather
+than the structure of your application.
+
+The re-write that `phar-install` performs is intended to ensure
+that classes take less time to load and that your error messages
+are consistent with the files you see on disk.
+
 ## Copyright
 
 Copyright dxw 2015 - see [COPYING.md](COPYING.md)
