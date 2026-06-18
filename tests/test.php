@@ -84,4 +84,19 @@ if ($paths !== EXPECTED) {
     exit(1);
 }
 
+// Portability check: composer's generated autoload files must not bake in any
+// absolute host path. If they do (e.g. `$baseDir = '/home/user/project';`),
+// the phar will autoload from non-existent paths on any other machine.
+$hostPath = getcwd();
+foreach (new \RecursiveIteratorIterator($phar) as $file) {
+    if (substr($file->getPathname(), -4) !== '.php') {
+        continue;
+    }
+    $contents = file_get_contents($file->getPathname());
+    if (strpos($contents, $hostPath) !== false) {
+        echo "TEST FAILED: host path {$hostPath} leaked into ".$file->getPathname()."\n";
+        exit(1);
+    }
+}
+
 echo "Test succeeded!\n";
