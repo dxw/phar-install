@@ -14,10 +14,21 @@ rm -rf $TMP_DIR $TMP_FILE
 mkdir -p $TMP_DIR
 
 # Install dependencies
+#
+# Copy composer.{json,lock} into $TMP_DIR and run composer install from there
+# (rather than using COMPOSER_VENDOR_DIR to point an out-of-tree vendor dir at
+# $TMP_DIR) so that composer's generated autoload files express $baseDir as
+# dirname($vendorDir) rather than hard-coding the host's absolute project path.
+# That hard-coding would otherwise make the phar non-portable across machines.
 
-COMPOSER_VENDOR_DIR=$TMP_DIR/vendor composer install --no-dev --no-interaction
+cp composer.json $TMP_DIR/
+[ -f composer.lock ] && cp composer.lock $TMP_DIR/
 
 cd $TMP_DIR
+
+composer install --no-dev --no-interaction
+
+rm -f composer.json composer.lock
 
 php -d phar.readonly=Off <<'EOF'
 <?php
