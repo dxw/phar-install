@@ -6,7 +6,8 @@ set -xe
 
 export TMP_DIR=/tmp/phar-install-tmp-dir
 export TMP_FILE=/tmp/phar-install-tmp.phar
-export PHAR=`pwd`/vendor.phar
+PHAR=$(pwd)/vendor.phar
+export PHAR
 
 # Cleanup
 
@@ -46,6 +47,6 @@ $rand = sprintf('%x', mt_rand());
 $phar->setStub("<?php Phar::mapPhar('{$rand}'); return include('phar://{$rand}/vendor/autoload.php'); __HALT_COMPILER();");
 EOF
 
-mv -f $TMP_FILE $PHAR
+mv -f $TMP_FILE "$PHAR"
 
 rm -rf $TMP_DIR $TMP_FILE
