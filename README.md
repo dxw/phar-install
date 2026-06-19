@@ -8,7 +8,7 @@ This may be useful if you want to put your project in a web-readable directory b
 
 Add the following to `composer.json`:
 
-```
+```json
   "scripts": {
     "post-update-cmd": "vendor/bin/phar-install"
   },
@@ -16,7 +16,7 @@ Add the following to `composer.json`:
 
 Add phar-install:
 
-```
+```console
 composer require --dev dxw/phar-install
 ```
 
